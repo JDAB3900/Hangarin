@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-aki@&eowcq#x8yk&p5o0+qu0-b5_di=9l%^1!s1@#@6s(ns!(=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["joeldave.pythonanywhere.com", "127.1.1.8000"]
+ALLOWED_HOSTS = ["joeldave.pythonanywhere.com", "127.0.0.1"]
 
 
 INSTALLED_APPS = [
@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Application',
+    'widget_tweaks',
 ]
 TIME_ZONE = 'Asia/Manila'
 USE_TZ = True
@@ -61,7 +62,7 @@ ROOT_URLCONF = 'projectsite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -119,6 +120,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = (
+    BASE_DIR / 'static',
+)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
