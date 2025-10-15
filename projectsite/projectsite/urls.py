@@ -22,6 +22,7 @@ from Application import views
 
 urlpatterns = [
 path("admin/", admin.site.urls),
+path("accounts/", include("allauth.urls")), # allauth routes
 path('', views.HomePageView.as_view(), name='home'),
 path('', include('Application.urls')),
 ]
