@@ -8,6 +8,28 @@
     </h4>
     <div class="card">
       <div class="card-body table-responsive">
+        {% include 'includes/search_form.html' %}
+        {% with current=sort_by|default:'-created_at' %}
+        <div class="col-md-12">
+          <form method="get" class="row g-2 align-items-center">
+            <input type="hidden" name="q" value="{{ q }}">
+            <div class="col-auto">
+              <label for="noteSortSelect" class="col-form-label">Sort by</label>
+            </div>
+            <div class="col-auto">
+              <select class="form-control form-control-sm" id="noteSortSelect" name="sort_by" onchange="this.form.submit()">
+                <option value="task__title" {% if current == 'task__title' %}selected{% endif %}>Task</option>
+                <option value="content" {% if current == 'content' %}selected{% endif %}>Content</option>
+                <option value="created_at" {% if current == 'created_at' %}selected{% endif %}>Created (oldest first)</option>
+                <option value="-created_at" {% if current == '-created_at' %}selected{% endif %}>Created (newest first)</option>
+              </select>
+            </div>
+            <div class="col-auto">
+              <button type="submit" class="btn btn-primary btn-sm btn-rounded">Sort</button>
+            </div>
+          </form>
+        </div>
+        {% endwith %}
         <table class="table">
           <thead>
             <tr>

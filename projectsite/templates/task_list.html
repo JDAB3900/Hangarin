@@ -8,6 +8,31 @@
     </h4>
     <div class="card">
       <div class="card-body table-responsive">
+        {% include 'includes/search_form.html' %}
+        {% with current=sort_by|default:'category__name' %}
+        <div class="col-md-12">
+          <form method="get" class="row g-2 align-items-center">
+            <input type="hidden" name="q" value="{{ q }}">
+            <div class="col-auto">
+              <label for="taskSortSelect" class="col-form-label">Sort by</label>
+            </div>
+            <div class="col-auto">
+              <select class="form-control form-control-sm" id="taskSortSelect" name="sort_by" onchange="this.form.submit()">
+                <option value="title" {% if current == 'title' %}selected{% endif %}>Title</option>
+                <option value="status" {% if current == 'status' %}selected{% endif %}>Status</option>
+                <option value="deadline" {% if current == 'deadline' %}selected{% endif %}>Deadline</option>
+                <option value="priority__name" {% if current == 'priority__name' %}selected{% endif %}>Priority</option>
+                <option value="category__name" {% if current == 'category__name' %}selected{% endif %}>Category</option>
+                <option value="created_at" {% if current == 'created_at' %}selected{% endif %}>Created (oldest first)</option>
+                <option value="-created_at" {% if current == '-created_at' %}selected{% endif %}>Created (newest first)</option>
+              </select>
+            </div>
+            <div class="col-auto">
+              <button type="submit" class="btn btn-primary btn-sm btn-rounded">Sort</button>
+            </div>
+          </form>
+        </div>
+        {% endwith %}
         <table class="table">
           <thead>
             <tr>
