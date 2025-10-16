@@ -250,10 +250,7 @@
                             <li>No priorities found.</li>
                         {% endfor %}
                     </ul>
-                {% endif %}
-
-                {# Show Tasks ListView if tasks context is present #}
-                {% if tasks %}
+                    
                     <h2>Tasks</h2>
                     <a href="{% url 'task-add' %}">Add Task</a>
                     <ul>

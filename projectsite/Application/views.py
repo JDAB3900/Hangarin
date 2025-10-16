@@ -8,7 +8,7 @@ from django.utils import timezone
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Home page view (Task List)
-class HomePageView(ListView):
+class HomePageView(LoginRequiredMixin, ListView):
     model = Task
     context_object_name = 'home'
     template_name = "home.html"
@@ -43,6 +43,8 @@ class CategoryListView(ListView):
     model = Category
     template_name = 'category_list.html'
     context_object_name = 'categories'
+    ordering = ['name']
+    paginate_by = 5
 
     def get_ordering(self):
         allowed = ['name']
@@ -70,23 +72,28 @@ class CategoryCreateView(CreateView):
     fields = ['name']
     template_name = 'category_form.html'
     success_url = reverse_lazy('category-list')
+    paginate_by = 5
 
 class CategoryUpdateView(UpdateView):
     model = Category
     fields = ['name']
     template_name = 'category_form.html'
     success_url = reverse_lazy('category-list')
+    paginate_by = 5
 
 class CategoryDeleteView(DeleteView):
     model = Category
     template_name = 'category_confirm_delete.html'
     success_url = reverse_lazy('category-list')
+    paginate_by = 5
 
 # Priority Views
 class PriorityListView(ListView):
     model = Priority
     template_name = 'priority_list.html'
     context_object_name = 'priorities'
+    ordering = ['name']
+    paginate_by = 5
 
     def get_ordering(self):
         allowed = ['name']
@@ -115,23 +122,28 @@ class PriorityCreateView(CreateView):
     fields = ['name']
     template_name = 'priority_form.html'
     success_url = reverse_lazy('priority-list')
+    paginate_by = 5
 
 class PriorityUpdateView(UpdateView):
     model = Priority
     fields = ['name']
     template_name = 'priority_form.html'
     success_url = reverse_lazy('priority-list')
+    paginate_by = 5
 
 class PriorityDeleteView(DeleteView):
     model = Priority
     template_name = 'priority_confirm_delete.html'
     success_url = reverse_lazy('priority-list')
+    paginate_by = 5
 
 # Task Views
 class TaskListView(ListView):
     model = Task
     template_name = 'task_list.html'
     context_object_name = 'tasks'
+    ordering = ['category__name', 'priority__name', 'title']
+    paginate_by = 5
 
     def get_ordering(self):
         allowed = [
@@ -173,23 +185,28 @@ class TaskCreateView(CreateView):
     fields = ['title', 'description', 'status', 'deadline', 'priority', 'category']
     template_name = 'task_form.html'
     success_url = reverse_lazy('task-list')
+    paginate_by = 5
 
 class TaskUpdateView(UpdateView):
     model = Task
     fields = ['title', 'description', 'status', 'deadline', 'priority', 'category']
     template_name = 'task_form.html'
     success_url = reverse_lazy('task-list')
+    paginate_by = 5
 
 class TaskDeleteView(DeleteView):
     model = Task
     template_name = 'task_confirm_delete.html'
     success_url = reverse_lazy('task-list')
+    paginate_by = 5
 
 # SubTask Views
 class SubTaskListView(ListView):
     model = SubTask
     template_name = 'subtask_list.html'
     context_object_name = 'subtasks'
+    ordering = ['-created_at']
+    paginate_by = 5
 
     def get_ordering(self):
         allowed = [
@@ -226,23 +243,28 @@ class SubTaskCreateView(CreateView):
     fields = ['task', 'title', 'status']
     template_name = 'subtask_form.html'
     success_url = reverse_lazy('subtask-list')
+    paginate_by = 5
 
 class SubTaskUpdateView(UpdateView):
     model = SubTask
     fields = ['task', 'title', 'status']
     template_name = 'subtask_form.html'
     success_url = reverse_lazy('subtask-list')
+    paginate_by = 5
 
 class SubTaskDeleteView(DeleteView):
     model = SubTask
     template_name = 'subtask_confirm_delete.html'
     success_url = reverse_lazy('subtask-list')
+    paginate_by = 5
 
 # Note Views
 class NoteListView(ListView):
     model = Note
     template_name = 'note_list.html'
     context_object_name = 'notes'
+    ordering = ['-created_at']
+    paginate_by = 5
 
     def get_ordering(self):
         allowed = [
@@ -276,14 +298,17 @@ class NoteCreateView(CreateView):
     fields = ['task', 'content']
     template_name = 'note_form.html'
     success_url = reverse_lazy('note-list')
+    paginate_by = 5
 
 class NoteUpdateView(UpdateView):
     model = Note
     fields = ['task', 'content']
     template_name = 'note_form.html'
     success_url = reverse_lazy('note-list')
+    paginate_by = 5
 
 class NoteDeleteView(DeleteView):
     model = Note
     template_name = 'note_confirm_delete.html'
     success_url = reverse_lazy('note-list')
+    paginate_by = 5
