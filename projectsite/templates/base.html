@@ -1,5 +1,7 @@
 {% load static %}
 
+{% load pwa %}
+
 <!DOCTYPE html>
 <html>
 
@@ -8,6 +10,7 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/ready.css' %}">
     <link rel="stylesheet" href="{% static 'css/demo.css' %}">
+    {% progressive_web_app_meta %}
 </head>
 
 <body>
