@@ -13,7 +13,7 @@ STATUS_CHOICES = [
     ("Completed", "Completed"),
 ]
 
-class Category(BaseModel):
+class Category(models.Model):
     name = models.CharField(max_length=100)
 
     class Meta:
@@ -22,7 +22,7 @@ class Category(BaseModel):
     def __str__(self):
         return self.name
 
-class Priority(BaseModel):
+class Priority(models.Model):
     name = models.CharField(max_length=100)
 
     class Meta:

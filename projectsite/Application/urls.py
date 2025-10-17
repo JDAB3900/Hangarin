@@ -1,5 +1,12 @@
 from django.urls import path
 from . import views
+from .views import (
+    CategoryListView, CategoryCreateView, CategoryUpdateView, CategoryDeleteView,
+    PriorityListView, PriorityCreateView, PriorityUpdateView, PriorityDeleteView,
+    TaskListView, TaskCreateView, TaskUpdateView, TaskDeleteView,
+    SubTaskListView, SubTaskCreateView, SubTaskUpdateView, SubTaskDeleteView,
+    NoteListView, NoteCreateView, NoteUpdateView, NoteDeleteView,
+    )
 
 urlpatterns = [
     # Category URLs
